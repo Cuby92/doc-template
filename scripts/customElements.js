@@ -1,10 +1,12 @@
-// Divider sizes configuration
+// Divider configuration
 const dividerConfig = {
     tagName: 'doc-divider', // Name of the HTML tag, e.g. you can change from <doc-divider></doc-divider> to <d-d></d-d>. Note that custom HTML elements have to have colon(-) in the name.
 
+    // Defaults configuratiom
     defaultColor: 'black',  // Default color if not specified in attributes
     defaultSize: 'medium',  // Default size if not specified in attributes
 
+    // Sizes configuration
     sizes: {
         small: {
             length: '15mm',
