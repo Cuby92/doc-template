@@ -1,0 +1,55 @@
+/* Styles for page layout and print formatting */
+
+/* Sets page box to A4 with 1.5cm margins around content area. Applies globally to all printed pages, defining printable sheet dimensions */
+@page {
+    size: a4;
+    margin: 1.5cm;
+}
+
+@media print { /* Overrides screen styles for printing */
+    body {
+        margin: 0; /* Remove default body margin */
+        padding: 0; /* Remove default body margin */
+        font-size: 12pt; /* Set base font size for printed content in point units */
+    }
+}
+
+/* Ensures that colors defined in CSS are preserved when printing. Normally, the browser ignores for instance background-color. */
+html {
+    print-color-adjust: exact !important;
+}
+
+.page {
+    width: 210mm; /* Sets page width to A4 size */
+    height: auto;
+    margin: 0 auto; /* Centers the page horizontally */
+    background: white;
+    padding: 1.5cm; 
+    box-sizing: border-box;
+}
+
+/* Browser preview styles */
+@media screen {
+    body {
+        margin: 0;
+    }
+
+    .page {
+        width: 21cm;
+        min-height: 29.7cm;
+        height: auto;
+        margin: 1rem auto; /* Adds margin around the page for better visual separation in browser preview */
+        box-shadow: 0 0 0.5cm #ccc; /* Shadow to visually separate page from background */
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    tr, td {
+        page-break-inside: avoid; /* Prevents table rows from being split across pages when printing */
+    }
+}
+
+/* Ensures that strong elements are bold when printed, browsers could sometimes try to override it */
+strong {
+    font-weight: bold !important;
+}
