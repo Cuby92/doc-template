@@ -3,7 +3,8 @@
 /* Sets page box to A4 with 1.5cm margins around content area. Applies globally to all printed pages, defining printable sheet dimensions */
 @page {
     size: a4;
-    margin: 1.5cm;
+    margin-inline: 1cm; /* Horizontal margins */
+    margin-block: 1.5cm; /* Vertical margins */
 }
 
 @media print { /* Overrides screen styles for printing */
@@ -24,7 +25,7 @@ html {
     height: auto;
     margin: 0 auto; /* Centers the page horizontally */
     background: white;
-    padding: 1.5cm; 
+    padding: 1cm; 
     box-sizing: border-box;
 }
 
