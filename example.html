@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RP2350</title>
+
+    <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <script src="./scripts/customElements.js"></script>
+</head>
+
+<body>
+<section class="page">
+	<header style="width:100%;margin-bottom:70px">
+		<h1>RP2350</h1>
+		<doc-divider size="large"></doc-divider>
+		<p style="font-family:'Poppins'; font-weight: 300;">Jakub Barczyński</p>
+	</header>
+	
+    <section class="segment">
+        <h2>1. Budowa</h2>
+        <doc-divider></doc-divider>
+
+        <div class="img-container">
+            <img src="./img/block-scheme.png" style="width:60%" />
+        </div>
+
+        <section class="subsegment">
+            <h3>1.1. Specyfikacja</h3>
+            <doc-divider size="small"></doc-divider>
+            <ul>
+                <li>Podwójny rdzeń Cortex-M33 lub Hazard3 o taktowaniu 150MHz</li>
+                <li>520kB wbudowanej pamięci SRAM</li>
+                <li>8kB pamięci jednokrotnego zapisu (OTP)</li>
+                <li>Wbudowany zasilacz impulsowy</li>
+                <li>Opcjonalny tryb LDO o niskim prądzie spoczynkowym dla stanów uśpienia</li>
+                <li>2 wbudowane pętle PLL do wewnętrznego lub zewnętrznego generowania sygnału zegarowego</li>
+                <li>Piny GPIO tolerują napięcie 5 V (pod zasilaniem) oraz posiadają zabezpieczenie failsafe 3,3 V (bez zasilania)</li>
+            </ul>
+        </section>
+
+        <section class="subsegment">
+            <h3>1.2. Peryferia</h2>
+            <doc-divider size="small"></doc-divider>
+            <ul>
+                <li>2 interfejsy UART</li>
+                <li>2 kontrolery SPI</li>
+                <li>2 kontrolery I2C</li>
+                <li>24 kanały PWM</li>
+                <li>Kontroler USB 1.1 oraz PHY ze wsparciem dla trybów hosta i urządzenia (interfejs zapewniający łączność Full Speed (FS) i Low Speed (LS) pod kontrolą oprogramowania)</li>
+                <li>12 maszyn stanów PIO (maszyny te są zgrupowane w trzech blokach programowalnego wejścia/wyjścia (PIO), z których każdy zawiera cztery niezależne jednostki zdolne do obsługi różnorodnych standardów komunikacyjnych)</li>
+                <li>Peryferium HSTX (blok przeznaczony do szybkiej transmisji danych (high-speed transmit), który można przypisać do pinów GPIO)</li>
+            </ul>
+        </section>
+    </section>
+
+    <section class="segment">
+        <h2>2. Lista Rozkazów</h2>
+        <doc-divider></doc-divider>
+        <ul>
+            <li><strong>JMP</strong> - Skok do określonego adresu.</li>
+            <li><strong>WAIT</strong> - wstrzymanie wykonywania programu do momentu spełnienia określonego warunku na pinie GPIO, fladze IRQ lub dedykowanym pinie JMP.</li>
+            <li><strong>IN</strong> - przesunięcie określonej liczby bitów (1–32) ze źródła (piny, rejestry X, Y, ISR, OSR) do rejestru wejściowego ISR.</li>
+            <li><strong>OUT</strong> - przesunięcie bitów z rejestru wyjściowego OSR do miejsca docelowego.</li>
+            <li><strong>PUSH</strong> - przesłanie zawartości rejestru ISR do kolejki RX FIFO jako 32-bitowe słowo i wyzerowanie ISR</li>
+            <li><strong>MOV</strong> - Kopiowanie danych między rejestrami. Może wykonywać operacje negacji lub odwrócenia kolejności bitów</strong></li>
+            <li><strong>PULL</strong> - Pobranie 32-bitowego słowa z kolejki TX FIFO do rejestru OSR</li>
+            <li><strong>IRQ</strong> - Ustawienie, wyczyszczenie lub oczekiwanie na flagę przerwania</li>
+            <li><strong>SET</strong> - Bezpośrednie zapisanie 5-bitowej wartości natychmiastowej do pinów lub rejestrów</li>
+        </ul>
+    </section>
+
+    <section class="subsegment">
+        <h2>3. Mapa Adresów</h2>
+        <doc-divider></doc-divider>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Segment Magistrali</th>
+                    <th>Adres Bazowy</th>
+                </tr>
+                <tr>
+                    <td>ROM</td>
+                    <td>0x00000000</td>
+                </tr>
+                <tr>
+                    <td>XIP</td>
+                    <td>0x10000000</td>
+                </tr>
+                <tr>
+                    <td>SRAM</td>
+                    <td>0x20000000</td>
+                </tr>
+                <tr>
+                    <td>Peryferia APB</td>
+                    <td>0x40000000</td>
+                </tr>
+                <tr>
+                    <td>Peryferia AHB</td>
+                    <td>0x50000000</td>
+                </tr>
+                <tr>
+                    <td>Peryferia Lokalne Dla Rdzenia</td>
+                    <td>0xd0000000</td>
+                </tr>
+                <tr>
+                    <td>Prywatne Rejestry Rdzenia Cortex-M33</td>
+                    <td>0xe0000000</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="subsegment">
+        <h2>4. Wersje Mikrokontrolera</h2>
+        <doc-divider></doc-divider>
+
+        <section class="subsegment">
+            <h3>4.1. RP2350A</h3>
+            <doc-divider size="small"></doc-divider>
+            <div class="img-container"><img src="./img/pinout-a.png" style="width:70%; height:auto"/></div>
+            <ul>
+                <li><strong>Obudowa</strong>: QNF-60 (7x7 mm)</li>
+                <li><strong>Liczba pinów GPIO</strong>: 30</li>
+                <li><strong>Wejścia analogowe</strong>: 4</li>
+            </ul>
+        </section>
+
+        <section class="subsegment">
+            <h3>4.2. RP2350B</h3>
+            <doc-divider size="small"></doc-divider>
+            <div class="img-container"><img src="./img/pinout-b.png" style="width:70%; height:auto"/></div>
+            <ul>
+                <li><strong>Obudowa</strong>: QFN-80 (10x10 mm)</li>
+                <li><strong>Liczba pinów GPIO</strong>: 48</li>
+                <li><strong>Wejścia analogowe</strong>: 8</li>
+            </ul>
+        </section>
+    </section>
+
+    <section class="segment">
+        <h2>5. Opis Wyprowadzeń</h3>
+        <doc-divider></doc-divider>
+
+        <div class="table-container">
+            <table id="pin-descriptions">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                </tr>
+                <tr>
+                    <td>GPIOx</td>
+                    <td>Piny wejścia/wyjścia ogólnego zastosowania</td>
+                </tr>
+                <tr>
+                    <td>GPIOx/ADCy </td>
+                    <td>Piny wejścia/wyjścia ogólnego zastosowania z przetwornikiem analogowo-cyfrowym.</td>
+                </tr>
+                <tr>
+                    <td>QSPIx</td>
+                    <td>Interfejs do pamięci flash lub PSRAM typu SPI, Dual-SPI lub Quad-SPI. Piny mogą być również wykorzystywane jako piny GPIO.</td>
+                </tr>
+                <tr>
+                    <td>USB_DM i USB_DP</td>
+                    <td>Kontroler USB, wspiera urządzenia Full Speed oraz tryb hosta High/Low Speed. Piny mogą być również używane jako piny GPIO</td>
+                </tr>
+                <tr>
+                    <td>XIN i XOUT</td>
+                    <td>Piny do podłączenia zewnętrznego oscylatora kwarcowego. XIN może być również wykorzystany jako wejście dla niesymetrycznego sygnału zegarowego CMOS przy odłączonym pinie XOUT.</td>
+                </tr>
+                <tr>
+                    <td>RUN</td>
+                    <td>Globalny asynchroniczny pin resetu. Reset przy stanie niskim.</td>
+                </tr>
+                <tr>
+                    <td>SWCLK i SWDIO</td>
+                    <td>Dostęp do wewnętrznej magistrali wielopunktowej (multi-drop) Serial Wire Debug. Zapewnia dostęp debugowania i może być wykorzystywany do pobierania kodu.</td>
+                </tr>
+                <tr>
+                    <td>GND</td>
+                    <td>Masa</td>
+                </tr>
+                <tr>
+                    <td>IOVDD</td>
+                    <td>Zasilanie dla cyfrowych pinów GPIO, napięcie 1.8-3.3V.</td>
+                </tr>
+                <tr>
+                    <td>USB_OTP_VDD</td>
+                    <td>Zasilanie wewnętrznego interfejsu fizycznego (PHY) USB Full Speed oraz pamięci OTP, napięcie nominalne 3,3 V.</td>
+                </tr>
+                <tr>
+                    <td>ADC_AVDD</td>
+                    <td>Zasilanie dla konwertera analogowo-cyfrowego, napięcie nominalne 3.3V.</td>
+                </tr>
+                <tr>
+                    <td>QSPI_IOVDD</td>
+                    <td>Zasilanie dla pinów wejścia/wyjść (IO) magistrali QSPI, napięcie nominalne 1.8 V-3.3 V.</td>
+                </tr>
+                <tr>
+                    <td>VREG_AVDD</td>
+                    <td>Analogowe zasilanie dla stabilizatora napięcia rdzenia.</td>
+                </tr>
+                <tr>
+                    <td>VREG_PGND</td>
+                    <td>Masa do stabilizatora napięcia rdzenia.</td>
+                </tr>
+                <tr>
+                    <td>VREG_LX</td>
+                    <td>Wyjście impulsowe dla wewnętrznego regulatora napięcia rdzenia, podłączane do zewnętrznej cewki. Maksymalny prąd 200 mA, napięcie nominalne 1,1 V po przefiltrowaniu</td>
+                </tr>
+                <tr>
+                    <td>VREG_VIN</td>
+                    <td>Zasilanie dla stabilizatora napięcia rdzenia.</td>
+                </tr>
+                <tr>
+                    <td>VREG_FB</td>
+                    <td>Sprzężenie zwrotne napięcia dla wewnętrznego regulatora napięcia rdzenia.</td>
+                </tr>
+                <tr>
+                    <td>DVDD</td>
+                    <td>Cyfrowe zasilanie rdzenia, napięcie nominalne 1.1V.</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</section>
+</body>
+</html>
