@@ -1,3 +1,36 @@
+// Divider sizes configuration
+const dividerConfig = {
+    tagName: 'doc-divider', // Name of the HTML tag, e.g. you can change from <doc-divider></doc-divider> to <d-d></d-d>. Note that custom HTML elements have to have colon(-) in the name.
+
+    defaultColor: 'black',  // Default color if not specified in attributes
+    defaultSize: 'medium',  // Default size if not specified in attributes
+
+    sizes: {
+        small: {
+            length: '15mm',
+            thickness: '1pt',
+            opacity: 0.6,
+            topMargin: '-5mm',
+            bottomMargin: '5mm'
+        },
+        medium: {
+            length: '110mm',
+            thickness: '1pt',
+            opacity: 0.7,
+            topMargin: '-5mm',
+            bottomMargin: '5mm'
+        },
+        large: {
+            length: '100mm',
+            thickness: '2pt',
+            opacity: 1,
+            topMargin: '-10mm',
+            bottomMargin: '5mm'
+        }
+    }
+}
+
+
 class Divider extends HTMLElement {
     static get observedAttributes() {
         return ['color', 'size'];
@@ -7,37 +40,43 @@ class Divider extends HTMLElement {
         super();
     }
 
+    applyAttributes() {
+        const size = this.getAttribute('size') || dividerConfig.defaultSize;
+        const color = this.getAttribute('color') || dividerConfig.defaultColor;
+
+        switch(size) {
+            case 'small':
+                this.style.setProperty('height', dividerConfig.sizes.small.thickness, 'important');
+                this.style.setProperty('width', dividerConfig.sizes.small.length, 'important');
+                this.style.setProperty('opacity', dividerConfig.sizes.small.opacity, 'important');
+                this.style.setProperty('margin', `${dividerConfig.sizes.small.topMargin} 0 ${dividerConfig.sizes.small.bottomMargin} 0`)
+                break;
+            case 'medium':
+                this.style.setProperty('height', dividerConfig.sizes.medium.thickness, 'important');
+                this.style.setProperty('width', dividerConfig.sizes.medium.length, 'important');
+                this.style.setProperty('opacity', dividerConfig.sizes.medium.opacity, 'important');
+                this.style.setProperty('margin', `${dividerConfig.sizes.medium.topMargin} 0 ${dividerConfig.sizes.medium.bottomMargin} 0`)
+                break;
+            case 'large':
+                this.style.setProperty('height', dividerConfig.sizes.large.thickness, 'important');
+                this.style.setProperty('width', dividerConfig.sizes.large.length, 'important');
+                this.style.setProperty('opacity', dividerConfig.sizes.large.opacity, 'important');
+                this.style.setProperty('margin', `${dividerConfig.sizes.large.topMargin} 0 ${dividerConfig.sizes.large.bottomMargin} 0`)
+                break;
+            default: 
+                this.style.setProperty('size', size, 'important');
+                this.style.setProperty('display', 'block', 'important');
+                break;
+        }
+        this.style.setProperty('background-color', color, 'important');
+    }
+
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'color') {
-        this.style.backgroundColor = newValue || 'black';
-        }  else {
-            this.style.backgroundColor = 'black';
-        }
-        if (name === 'size') {
-            switch(newValue) {
-                case 'small':
-                    this.style.height = '1pt';
-                    this.style.width = '15mm';
-                    this.style.opacity = '0.7';
-                    break;
-                case 'medium':
-                    this.style.height = '1pt';
-                    this.style.width = '70mm';
-                    this.style.opacity = '1';
-                    break;
-                case 'large':
-                    this.style.height = '2pt';
-                    this.style.width = '100mm';
-                    this.style.opacity = '1';
-                    break;
-                default: 
-                    this.style.height = newValue;
-                    break;
-            }
-        }
+        this.applyAttributes();
     }
 
     connectedCallback() {
+        this.applyAttributes();
         this.render();
     }
 
@@ -47,4 +86,4 @@ class Divider extends HTMLElement {
     }
 }
 
-customElements.define('doc-divider', Divider);
+customElements.define(dividerConfig.tagName, Divider);
