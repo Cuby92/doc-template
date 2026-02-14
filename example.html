@@ -20,14 +20,16 @@
 	</header>
 	
     <section class="segment">
-        <h2>1. Architecture</h2>
-        <doc-divider></doc-divider>
+        <no-split>
+            <h2>1. Architecture</h2>
+            <doc-divider></doc-divider>
 
-        <div class="img-container">
-            <img src="./img/block-scheme.png" style="width:60%" />
-        </div>
+            <center-content>
+                <img src="./img/block-scheme.png" style="width:60%" />
+            </center-content>
+        </no-split>
 
-        <section class="subsegment">
+        <no-split>
             <h3>1.1. Specification</h3>
             <doc-divider size="small"></doc-divider>
             <ul>
@@ -39,9 +41,9 @@
                 <li>2 built-in PLL loops for internal or external clock signal generation</li>
                 <li>GPIO pins tolerate 5V (under power) and have failsafe 3.3V protection (unpowered)</li>
             </ul>
-        </section>
+        </no-split>
 
-        <section class="subsegment">
+        <section class="no-split"> <!-- Element with .no-split class works the same as <no-split> element -->
             <h3>1.2. Peripherals</h2>
             <doc-divider size="small"></doc-divider>
             <ul>
@@ -56,7 +58,7 @@
         </section>
     </section>
 
-    <section class="segment">
+    <section class="no-split">
         <h2>2. Instruction Set</h2>
         <doc-divider></doc-divider>
         <ul>
@@ -72,10 +74,10 @@
         </ul>
     </section>
 
-    <section class="subsegment">
+    <section class="no-split">
         <h2>3. Address Map</h2>
         <doc-divider></doc-divider>
-        <div class="table-container">
+        <center-content>
             <table>
                 <tr>
                     <th>Bus Segment</th>
@@ -110,14 +112,14 @@
                     <td>0xe0000000</td>
                 </tr>
             </table>
-        </div>
+        </center-content>
     </section>
 
-    <section class="subsegment">
+    <section class="no-split">
         <h2>4. Microcontroller Variants</h2>
         <doc-divider></doc-divider>
 
-        <section class="subsegment">
+        <section class="no-split">
             <h3>4.1. RP2350A</h3>
             <doc-divider size="small"></doc-divider>
             <div class="img-container"><img src="./img/pinout-a.png" style="width:70%; height:auto"/></div>
@@ -128,10 +130,12 @@
             </ul>
         </section>
 
-        <section class="subsegment">
+        <section class="no-split">
             <h3>4.2. RP2350B</h3>
             <doc-divider size="small"></doc-divider>
-            <div class="img-container"><img src="./img/pinout-b.png" style="width:70%; height:auto"/></div>
+            <center-content>
+                <img src="./img/pinout-b.png" style="width:70%; height:auto"/>
+            </center-content>
             <ul>
                 <li><strong>Package</strong>: QFN-80 (10x10 mm)</li>
                 <li><strong>GPIO Pin Count</strong>: 48</li>
@@ -140,11 +144,13 @@
         </section>
     </section>
 
-    <section class="segment">
+    <page-break></page-break>
+
+    <section>
         <h2>5. Pin Descriptions</h2>
         <doc-divider></doc-divider>
 
-        <div class="table-container">
+        <center-content>
             <table id="pin-descriptions">
                 <tr>
                     <th>Name</th>
@@ -223,7 +229,7 @@
                     <td>Cyfrowe zasilanie rdzenia, napięcie nominalne 1.1V.</td>
                 </tr>
             </table>
-        </div>
+        </center-content>
     </section>
 </section>
 </body>
