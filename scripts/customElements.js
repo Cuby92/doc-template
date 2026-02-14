@@ -1,3 +1,4 @@
+// CONFIGURATION PANEL
 // Divider configuration
 const dividerConfig = {
     tagName: 'doc-divider', // Name of the HTML tag, e.g. you can change from <doc-divider></doc-divider> to <d-d></d-d>. Note that custom HTML elements have to have colon(-) in the name.
@@ -41,6 +42,13 @@ const noSplitConfig = {
 const centerConfig = {
     tagName: 'center-content'
 }
+
+// Page break component configuration
+const pageBreakConfig = {
+    tagName: 'page-break'
+}
+
+// END OF CONFIGURATION PANEL
 
 
 class Divider extends HTMLElement {
@@ -128,3 +136,21 @@ class Center extends HTMLElement {
 }
 
 customElements.define(centerConfig.tagName, Center);
+
+
+class PageBreak extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.style.setProperty('page-break-after', 'always');
+        this.render();
+    }
+
+    render() {
+        this.innerHTML = '';
+    }
+}
+
+customElements.define(pageBreakConfig.tagName, PageBreak);
