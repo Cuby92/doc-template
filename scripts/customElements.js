@@ -16,7 +16,7 @@ const dividerConfig = {
             bottomMargin: '3mm'
         },
         medium: {
-            length: '110mm',
+            length: '80mm',
             thickness: '1pt',
             opacity: 0.7,
             topMargin: '-5mm',
