@@ -33,3 +33,10 @@ Enforces page break. Works the same as `div` with class `.page-break-after`, but
 
 ### Elements Customization
 You can edit all the default values and tag names in customElements.js. You can do that by changing the properties in configuration panel, marked with `// CONFIGURATION PANEL` comment. Everything is described by comments.
+
+## Example Document
+I have created an example document example.html which was my homework. It was my first document made in HTML. You can see it to better understand the concepts in use.
+
+## Important Information
+The browser preview isn't perfectly aligned with the final result. To see how the document will look like you need to print it to PDF (Ctrl + P). You will see the final preview in the browser print window. The browser can also try to override the margins, that will result in strange result. You need to change margins to default in the print window.
+If you know how to fix these disalignments, contact me or edit yourself and pull request. 
