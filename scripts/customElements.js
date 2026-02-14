@@ -111,7 +111,7 @@ class NoSplit extends HTMLElement {
     }
 }
 
-customElements.define(NoSplit.tagName, NoSplit);
+customElements.define(noSplitConfig.tagName, NoSplit);
 
 
 class Center extends HTMLElement {
