@@ -35,6 +35,12 @@ h4 {
     font-weight: 300;
 }
 
+
+/* Class that prevents content from splitting between pages */
+.no-split {
+    page-break-inside: avoid;
+}
+
 /* Enforces page break before element */
 .break-before {
     page-break-before: always;
@@ -54,9 +60,4 @@ td, th {
 table {
     text-align: left;
     border-collapse: collapse;
-}
-
-/* Class that prevents content from splitting between pages */
-.no-split {
-    page-break-inside: avoid;
 }
