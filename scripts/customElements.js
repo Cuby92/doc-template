@@ -37,6 +37,11 @@ const noSplitConfig = {
     tagName: 'no-split'
 }
 
+// Centering container configuration
+const centerConfig = {
+    tagName: 'center-content'
+}
+
 
 class Divider extends HTMLElement {
     static get observedAttributes() {
@@ -107,3 +112,19 @@ class NoSplit extends HTMLElement {
 }
 
 customElements.define(NoSplit.tagName, NoSplit);
+
+
+class Center extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.style.setProperty('width', '100%');
+        this.style.setProperty('display', 'flex');
+        this.style.setProperty('justify-content', 'center');
+        this.style.setProperty('align-items', 'center');
+    }
+}
+
+customElements.define(centerConfig.tagName, Center);
