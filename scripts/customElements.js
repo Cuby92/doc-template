@@ -38,9 +38,10 @@ const noSplitConfig = {
     tagName: 'no-split'
 }
 
-// Centering container configuration
-const centerConfig = {
-    tagName: 'center-content'
+// Align container configuration
+const alignConfig = {
+    tagName: 'align-cont',
+    defaultAlign: 'center' // Default align type, when attribute not specified. ('left' / 'center' / 'right')
 }
 
 // Page break component configuration
@@ -50,7 +51,7 @@ const pageBreakConfig = {
 
 // END OF CONFIGURATION PANEL
 
-
+// Divider
 class Divider extends HTMLElement {
     static get observedAttributes() {
         return ['color', 'size'];
@@ -108,7 +109,7 @@ class Divider extends HTMLElement {
 
 customElements.define(dividerConfig.tagName, Divider);
 
-
+// No Split
 class NoSplit extends HTMLElement {  
     constructor() {
         super();
@@ -121,23 +122,45 @@ class NoSplit extends HTMLElement {
 
 customElements.define(noSplitConfig.tagName, NoSplit);
 
+// Align container
+class AlignContainer extends HTMLElement {
+    static get observedAttributes() {
+        return ['align'];
+    }
 
-class Center extends HTMLElement {
     constructor() {
         super();
     }
 
+    applyAttributes() {
+        const align = this.getAttribute('align') || alignConfig.defaultAlign;
+
+        switch(align) {
+            case 'right':
+                this.style.setProperty('justify-content', 'right', 'important');
+                break;
+            case 'left':
+                this.style.setProperty('justify-content', 'left', 'important');
+                break;
+            case 'center':
+                this.style.setProperty('justify-content', 'center', 'important');
+                break;
+            default:
+                this.style.setProperty('justify-content', alignConfig.defaultAlign, 'important')
+        }
+    }
+
     connectedCallback() {
+        this.applyAttributes();
         this.style.setProperty('width', '100%');
         this.style.setProperty('display', 'flex');
-        this.style.setProperty('justify-content', 'center');
         this.style.setProperty('align-items', 'center');
     }
 }
 
-customElements.define(centerConfig.tagName, Center);
+customElements.define(alignConfig.tagName, AlignContainer);
 
-
+// Page break
 class PageBreak extends HTMLElement {
     constructor() {
         super();
