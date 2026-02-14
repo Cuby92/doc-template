@@ -32,6 +32,11 @@ const dividerConfig = {
     }
 }
 
+// noSplit element configuration
+const noSplitConfig = {
+    tagName: 'no-split'
+}
+
 
 class Divider extends HTMLElement {
     static get observedAttributes() {
@@ -89,3 +94,20 @@ class Divider extends HTMLElement {
 }
 
 customElements.define(dividerConfig.tagName, Divider);
+
+
+class NoSplit extends HTMLElement {
+        static get observedAttributes() {
+        return ['color', 'size'];
+    }
+    
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.style.setProperty('page-break-inside', 'avoid')
+    }
+}
+
+customElements.define(NoSplit.tagName, NoSplit);
