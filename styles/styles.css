@@ -73,3 +73,7 @@ table {
     justify-content: center;
     margin-top: 30pt;
 }
+
+.no-split {
+    page-break-inside: avoid;
+}
