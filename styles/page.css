@@ -1,4 +1,4 @@
-/* Styles for page layout and print formatting */
+/* STYLESHEET FOR PAGE LAYOUT */
 
 /* Sets page box to A4 with 1.5cm margins around content area. Applies globally to all printed pages, defining printable sheet dimensions */
 @page {
