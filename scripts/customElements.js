@@ -96,11 +96,7 @@ class Divider extends HTMLElement {
 customElements.define(dividerConfig.tagName, Divider);
 
 
-class NoSplit extends HTMLElement {
-        static get observedAttributes() {
-        return ['color', 'size'];
-    }
-    
+class NoSplit extends HTMLElement {  
     constructor() {
         super();
     }
