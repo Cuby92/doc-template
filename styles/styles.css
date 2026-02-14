@@ -35,11 +35,6 @@ h4 {
     font-weight: 300;
 }
 
-/* Use on elements that should not be split across pages when printing */
-.no-break {
-    page-break-inside: avoid;
-}
-
 /* Enforces page break before element */
 .break-before {
     page-break-before: always;
