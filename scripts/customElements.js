@@ -54,7 +54,7 @@ const pageBreakConfig = {
 // Divider
 class Divider extends HTMLElement {
     static get observedAttributes() {
-        return ['color', 'size'];
+        return ['color', 'size', 'length', 'thickness'];
     }
     
     constructor() {
@@ -64,30 +64,37 @@ class Divider extends HTMLElement {
     applyAttributes() {
         const size = this.getAttribute('size') || dividerConfig.defaultSize;
         const color = this.getAttribute('color') || dividerConfig.defaultColor;
+        const length = this.getAttribute('length');
+        const thickness = this.getAttribute('thickness');
 
-        switch(size) {
-            case 'small':
-                this.style.setProperty('height', dividerConfig.sizes.small.thickness, 'important');
-                this.style.setProperty('width', dividerConfig.sizes.small.length, 'important');
-                this.style.setProperty('opacity', dividerConfig.sizes.small.opacity, 'important');
-                this.style.setProperty('margin', `${dividerConfig.sizes.small.topMargin} 0 ${dividerConfig.sizes.small.bottomMargin} 0`)
-                break;
-            case 'medium':
-                this.style.setProperty('height', dividerConfig.sizes.medium.thickness, 'important');
-                this.style.setProperty('width', dividerConfig.sizes.medium.length, 'important');
-                this.style.setProperty('opacity', dividerConfig.sizes.medium.opacity, 'important');
-                this.style.setProperty('margin', `${dividerConfig.sizes.medium.topMargin} 0 ${dividerConfig.sizes.medium.bottomMargin} 0`)
-                break;
-            case 'large':
-                this.style.setProperty('height', dividerConfig.sizes.large.thickness, 'important');
-                this.style.setProperty('width', dividerConfig.sizes.large.length, 'important');
-                this.style.setProperty('opacity', dividerConfig.sizes.large.opacity, 'important');
-                this.style.setProperty('margin', `${dividerConfig.sizes.large.topMargin} 0 ${dividerConfig.sizes.large.bottomMargin} 0`)
-                break;
-            default: 
-                this.style.setProperty('size', size, 'important');
-                this.style.setProperty('display', 'block', 'important');
-                break;
+        if (!length || !thickness) {
+            switch(size) {
+                case 'small':
+                    this.style.setProperty('height', dividerConfig.sizes.small.thickness, 'important');
+                    this.style.setProperty('width', dividerConfig.sizes.small.length, 'important');
+                    this.style.setProperty('opacity', dividerConfig.sizes.small.opacity, 'important');
+                    this.style.setProperty('margin', `${dividerConfig.sizes.small.topMargin} 0 ${dividerConfig.sizes.small.bottomMargin} 0`)
+                    break;
+                case 'medium':
+                    this.style.setProperty('height', dividerConfig.sizes.medium.thickness, 'important');
+                    this.style.setProperty('width', dividerConfig.sizes.medium.length, 'important');
+                    this.style.setProperty('opacity', dividerConfig.sizes.medium.opacity, 'important');
+                    this.style.setProperty('margin', `${dividerConfig.sizes.medium.topMargin} 0 ${dividerConfig.sizes.medium.bottomMargin} 0`)
+                    break;
+                case 'large':
+                    this.style.setProperty('height', dividerConfig.sizes.large.thickness, 'important');
+                    this.style.setProperty('width', dividerConfig.sizes.large.length, 'important');
+                    this.style.setProperty('opacity', dividerConfig.sizes.large.opacity, 'important');
+                    this.style.setProperty('margin', `${dividerConfig.sizes.large.topMargin} 0 ${dividerConfig.sizes.large.bottomMargin} 0`)
+                    break;
+                default: 
+                    this.style.setProperty('size', size, 'important');
+                    this.style.setProperty('display', 'block', 'important');
+                    break;
+            }
+        } else {
+            this.style.setProperty('height', thickness, 'important');
+            this.style.setProperty('width', length, 'important')
         }
         this.style.setProperty('background-color', color, 'important');
     }
